@@ -1,3 +1,4 @@
+
 package ie.tudublin;
 
 import java.util.ArrayList;
@@ -11,12 +12,19 @@ public class Gantt extends PApplet
 	
 	ArrayList<Task> tasks = new ArrayList<Task>();
 
+	float yBorder;
+	float xBorder;
+	float w;
+
 
 	
 
 	public void settings()
 	{
 		size(800, 600);
+		xBorder = width * 0.05f;
+		yBorder = height * 0.10f;
+		w = width * 0.20f;
 	}
 
 	public void loadTasks()
@@ -40,16 +48,15 @@ public class Gantt extends PApplet
 
 	public void displayTasks()
 	{
-		float xBorder = width * 0.20f;
-		float yBorder = height * 0.05f; 
-		colorMode(RGB);
-		stroke(255);
-		textAlign(CENTER, CENTER);
 		for(int i = 1 ; i <=30 ; i ++)
 		{
-			float x = map(i, 1, 31, xBorder, width);				
-			line(x, yBorder , x, height - yBorder);
+			stroke(255);
 			fill(255);
+			
+			float x = map(i, 0, 30, w * 0.80f, width - xBorder);	
+			
+			textAlign(CENTER,CENTER);
+			line(x, yBorder , x, height - yBorder);
 			text(i, x, yBorder/2);
 			
 		}
@@ -61,16 +68,26 @@ public class Gantt extends PApplet
 
 			Task t = tasks.get(i);
 
-			float y = map(i, 0, tasks.size(), 80, height - (yBorder*4));
+			float y = map(i, 0, tasks.size(), xBorder*2 , height - yBorder);
 
 			textAlign(LEFT);
 			text(t.getTask(), yBorder, y);
-
 		}
 		
 
-		
+		for(int i = 0; i < tasks.size(); i++)
+		{
+			Task t = tasks.get(i);
+			noStroke();
+			colorMode(HSB);
+			fill(map(i, 0, tasks.size(), 0, 255), 255, 255);
+			
+			float y = map(i, 0, tasks.size(), xBorder*2 , height - yBorder);
+			float xStart = map(t.getStart(), 0, 30, w * 0.80f , width - xBorder);
+			float xEnd = map(t.getEnd(), 0, 30, w * 0.80f , width - xBorder);
+			rect(xStart, y - textAscent() , xEnd - xStart, yBorder/2, 7);
 
+		}
 
 	}
 
