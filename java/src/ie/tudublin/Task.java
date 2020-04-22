@@ -5,10 +5,10 @@ import processing.data.TableRow;
 public class Task {
 
     private String Task;
-    private String Start;
-    private String End;
+    private Float Start;
+    private Float End;
 
-    public Task(String Task, String Start, String End)
+    public Task(String Task, Float Start, Float End)
     {
         this.Task = Task;
         this.Start = Start;
@@ -17,7 +17,7 @@ public class Task {
 
     public Task(TableRow tr)
     {
-        this(tr.getString(arg0))
+        this(tr.getString("Task"), tr.getFloat("Start"), tr.getFloat("End"));
     }
 
     public String getTask() {
@@ -28,19 +28,19 @@ public class Task {
         Task = task;
     }
 
-    public String getStart() {
+    public Float getStart() {
         return Start;
     }
 
-    public void setStart(String start) {
+    public void setStart(Float start) {
         Start = start;
     }
 
-    public String getEnd() {
+    public Float getEnd() {
         return End;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(Float end) {
         End = end;
     }
 
