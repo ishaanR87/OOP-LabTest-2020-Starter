@@ -40,20 +40,33 @@ public class Gantt extends PApplet
 
 	public void displayTasks()
 	{
-		float gap = width * 0.20f;
+		float xBorder = width * 0.20f;
 		float yBorder = height * 0.05f; 
 		colorMode(RGB);
 		stroke(255);
 		textAlign(CENTER, CENTER);
 		for(int i = 1 ; i <=30 ; i ++)
 		{
-			float x = map(i, 1, 31, gap, width);				
+			float x = map(i, 1, 31, xBorder, width);				
 			line(x, yBorder , x, height - yBorder);
 			fill(255);
 			text(i, x, yBorder/2);
 			
 		}
 		
+		for(int i = 0; i < tasks.size(); i++)
+		{
+			fill(255);
+			stroke(255);
+
+			Task t = tasks.get(i);
+
+			float y = map(i, 0, tasks.size(), 80, height - (yBorder*4));
+
+			textAlign(LEFT);
+			text(t.getTask(), yBorder, y);
+
+		}
 		
 
 		
