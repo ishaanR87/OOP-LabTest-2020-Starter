@@ -1,4 +1,5 @@
-
+//Labtest OOP - Ishaan Rawat
+//Student No. C18459302
 package ie.tudublin;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Gantt extends PApplet
 	float yBorder; // Y axis border 
 	float xBorder; // X axis border
 	float w; // variable to readjust width of the boxes in the graph
+	boolean MousePressed = false;
 
 
 	
@@ -96,7 +98,37 @@ public class Gantt extends PApplet
 
 	public void mousePressed()
 	{
-		println("Mouse pressed");	
+		
+		for(int i = 0; i < tasks.size(); i++) //iterating through tasks
+		{
+			Task t = tasks.get(i);
+			float y = map(i, 0, tasks.size(), xBorder*2 , height - yBorder);
+			float xStart = map(t.getStart(), 0, 30, w * 0.80f , width - xBorder);
+			float xEnd = map(t.getEnd(), 0, 30, w * 0.80f , width - xBorder);
+
+			//attempting to implement mousePressed function
+
+			if(mouseX >= xStart && mouseY >= y - textAscent())
+			{
+				mousePressed = true;
+			}
+			else
+			{
+				mousePressed = false;
+			}
+
+			if(mouseX >= xEnd && mouseY >= y - textAscent())
+			{
+				mousePressed = true;
+			}
+			else
+			{
+				mousePressed = false;
+			}
+
+			println("Mouse pressed");
+		
+		}
 	}
 
 	public void mouseDragged()
